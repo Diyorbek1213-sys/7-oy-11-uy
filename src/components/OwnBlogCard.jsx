@@ -7,7 +7,11 @@ import { toast } from "sonner";
 const OwnBlogCard = ({ item, index, setCard, card }) => {
 
   const handleDelete = (index) => {
-    setCard(card.filter((_, i) => i !== index))
+    const updated = card.filter((_, i) => i !== index)
+    setCard(updated)
+
+    localStorage.setItem('card', JSON.stringify(updated))
+
     toast.success('The blog was successfully deleted!')
   }
   return (

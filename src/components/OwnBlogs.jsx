@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { ownRemove } from '../lib/slices/dataSlice';
 
 const OwnBlogs = () => {
-  const { ownBlogs } = useSelector(state => state.mainData)
+  const { ownBlogs } = useSelector(state => state.datareducer)
   const dispatch = useDispatch()
 
   const handleDelete = (index) => {

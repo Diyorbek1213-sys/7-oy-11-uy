@@ -32,7 +32,7 @@ const Home = () => {
     },
   });
 
-  const { data } = useSelector(state => state.mainData);
+  const { data } = useSelector(state => state.datareducer);
   const [searchValue, setSearchValue] = useState('');
   const [searched, setSearched] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
@@ -40,6 +40,13 @@ const Home = () => {
   const [card, setCard] = useState([])
 
   const debouncedQuery = useDebounce(searchValue, 700);
+
+  useEffect(() => {
+    const getCard = JSON.parse(localStorage.getItem('card')) || []
+    if (getCard) {
+      setCard(getCard)
+    }
+  }, [])
 
   useEffect(() => {
     const handleSearch = async () => {
@@ -67,6 +74,7 @@ const Home = () => {
   function onSubmit(value) {
     setCard([...card, value])
     dispatch(ownBlog(value))
+    localStorage.setItem('card', JSON.stringify(card))
 
     toast.success('Blog added successfully.')
 
